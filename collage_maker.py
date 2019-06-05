@@ -89,6 +89,7 @@ def main():
     parse.add_argument('-w', '--width', dest='width', type=int, help='resulting collage image width')
     parse.add_argument('-i', '--init_height', dest='init_height', type=int, help='initial height for resize the images')
     parse.add_argument('-s', '--shuffle', action='store_true', dest='shuffle', help='enable images shuffle')
+    parse.add_argument('-c', '--count', dest='count', type=int, help='count of images to use', default=10)
 
     args = parse.parse_args()
     if not args.width or not args.init_height:
@@ -106,6 +107,7 @@ def main():
     if args.shuffle:
         random.shuffle(images)
 
+    images = images[:args.count]
     print('Making collage...')
     res = make_collage(images, args.output, args.width, args.init_height)
     if not res:
